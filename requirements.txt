@@ -1,0 +1,18 @@
+# RLVR Dependencies
+# Install PyTorch first: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu130
+
+transformers==4.56.2
+trl==0.22.2
+peft>=0.18.0
+bitsandbytes>=0.49.0
+accelerate>=1.12.0
+datasets>=4.3.0
+
+# Unsloth (install separately via git)
+# pip install "unsloth_zoo[base] @ git+https://github.com/unslothai/unsloth-zoo"
+# pip install "unsloth[base] @ git+https://github.com/unslothai/unsloth" --no-deps
+
+# Jupyter
+jupyter>=1.0.0
+ipykernel>=7.0.0
+tensorboard>=2.20.0
