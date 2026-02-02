@@ -36,3 +36,4 @@ wandb/
 # Cache
 unsloth_compiled_cache/
 .claude/
+.codegraph/
