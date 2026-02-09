@@ -8,14 +8,24 @@ RLVR (Reinforcement Learning with Verifiable Rewards) project for fine-tuning LL
 
 ## Environment Setup
 
+**Machine:** DGX Spark (spark-a005)
+**Architecture:** ARM64 (aarch64) - always use ARM64-compatible packages
 **Conda environment:** `RL`
 **Python version:** 3.11
 **GPU:** NVIDIA GB10 (DGX Spark) with CUDA 13.0
+**Permissions:** No sudo access - use conda/pip for all installations
 
 ### Activate Environment
 ```bash
 conda activate RL
 ```
+
+### Environment Notes
+- Always activate the `RL` conda environment before running any Python scripts
+- GPU availability can be verified with the command in "Verify GPU Access" below
+- When installing new packages, use `pip install` or `conda install` (no sudo needed)
+- Training outputs are saved to `./outputs/` directory
+- Model checkpoints and adapters are saved incrementally during training
 
 ### Key Dependencies
 - PyTorch 2.10.0+cu130
@@ -64,8 +74,37 @@ num_generations = 2
 max_steps = 1000
 ```
 
+## Project Structure
+
+```
+outputs/                 # Training outputs and logs
+├── checkpoint-*/        # Model checkpoints saved during training
+└── runs/               # TensorBoard logs
+
+*.ipynb                 # Jupyter notebooks for training experiments
+*.py                    # Python scripts (training, evaluation)
+lora_model/            # Saved LoRA adapter weights
+```
+
 ## Resources
 
 - [2048 Notebook](https://colab.research.google.com/github/openai/gpt-oss/blob/main/examples/reinforcement-fine-tuning.ipynb)
 - [Unsloth GitHub](https://github.com/unslothai/unsloth)
 - [Unsloth Docs](https://docs.unsloth.ai)
+
+## Working with This Project
+
+### Before Training
+1. Ensure you're in the `RL` conda environment
+2. Verify GPU is accessible with the command above
+3. Check available disk space - training generates large checkpoint files
+
+### During Training
+- Monitor progress with TensorBoard (see Common Commands)
+- Training can take several hours depending on max_steps
+- Checkpoints are saved periodically - don't interrupt mid-checkpoint
+
+### After Training
+- Evaluate models using evaluation scripts
+- LoRA adapters can be merged with base model or used directly for inference
+- Commit trained adapters and outputs to git if performance is good
